@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home | AI Intuition Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="box">
+    <h1>Welcome to AI Intuition Assistant</h1>
+    <form method="POST" action="/add_reminder">
+        <input type="text" name="message" placeholder="Enter reminder" required>
+        <input type="time" name="time" required>
+        <button type="submit">Add Reminder</button>
+    </form>
+    <h2>Your Reminders</h2>
+    <ul>
+        {% for r in reminders %}
+        <li>
+            {{ r[1] }} at {{ r[2] }}
+            {% if r[3] == 0 %}
+                <a href="/mark_done/{{ r[0] }}">✅ Mark Done</a>
+            {% else %}
+                ✅ Done
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="/logout">Logout</a>
+</div>
+</body>
+</html>
+
