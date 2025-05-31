@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>📅 Your Routine</h2>
+<form method="POST" action="/add">
+    <input type="time" name="time" required>
+    <input type="text" name="text" placeholder="What to do?" required>
+    <button type="submit">➕ Add</button>
+</form>
+<ul>
+    {% for task in tasks %}
+        <li class="{{ 'done' if task.completed }}">
+            <strong>{{ task.time }}</strong> - {{ task.text }}
+            <a href="/complete/{{ task.id }}">✅</a>
+            <a href="/delete/{{ task.id }}">🗑</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
